@@ -44,7 +44,7 @@ class ContactList extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div className='contactList'>
                     Contacts:
                 </div>
                 <div>
