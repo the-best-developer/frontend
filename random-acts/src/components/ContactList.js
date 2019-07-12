@@ -1,10 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import './ContactList.css';
 import { addNewContact } from '../actions';
+import styled from 'styled-components'
 
+const MainContainer = styled.div`
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+`;
 
+const ContactsListDiv = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+const AddContactDiv = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 class ContactList extends React.Component {
     constructor(props) {
@@ -43,46 +63,50 @@ class ContactList extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
-                    Contacts:
-                </div>
-                <div>
-                    {this.props.contactList.map(c => 
-                    <div>
-                        <p>name: {c.name}</p>
-                        <p>phone number: {c.phoneNumber}</p>
-                        <p>email address: {c.email}</p>
+            <MainContainer>
+                <ContactsListDiv>
+                    <h1>Contacts</h1>
+                    {this.props.contactList.map((c, id) => 
+                    <div key={id}>
+                        <p><b>Name</b>: {c.name}</p>
+                        <p><b>Phone number</b>: {c.phoneNumber}</p>
+                        <p><b>Email address</b>: {c.email}</p>
                     </div>
                     )}
-                </div>  
-                <h1>Add New Contact:</h1>
-                <form type='submit' onSubmit={this.handleSubmit}>
-                    <input 
-                    type='text'
-                    value={this.state.newContact.name}
-                    name='name'
-                    placeholder='Enter name here'
-                    onChange={this.handleChange}
-                    />
-                    <input 
-                    type='text'
-                    value={this.state.newContact.phoneNumber}
-                    name='phoneNumber'
-                    placeholder='Enter phone number here'
-                    onChange={this.handleChange}
-                    />
-                    <input 
-                    type='text'
-                    value={this.state.newContact.email}
-                    name='email'
-                    placeholder='Enter email here'
-                    onChange={this.handleChange}
-                    />
-                    <button>Add Contact</button>
-                </form>
+                </ContactsListDiv>
                 
-            </div>
+                <AddContactDiv>
+                    <h1>Add New Contact:</h1>
+                    <form type='submit' onSubmit={this.handleSubmit}>
+                        <h2>Name:</h2>
+                        <input 
+                            type='text'
+                            value={this.state.newContact.name}
+                            name='name'
+                            placeholder='Enter name here'
+                            onChange={this.handleChange}
+                        />
+                        <h2>Phone number:</h2>
+                        <input 
+                        type='text'
+                            value={this.state.newContact.phoneNumber}
+                            name='phoneNumber'
+                            placeholder='Enter phone number here'
+                            onChange={this.handleChange}
+                        />
+                        <h2>Email:</h2>
+                        <input 
+                            type='text'
+                            value={this.state.newContact.email}
+                            name='email'
+                            placeholder='Enter email here'
+                            onChange={this.handleChange}
+                        />
+                        <br></br><br></br>
+                        <button>Add Contact</button>
+                    </form>
+                </AddContactDiv>
+            </MainContainer>
         );
     };
 }
