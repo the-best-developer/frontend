@@ -1,7 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
- 
-import './RandomService.css';
+import styled from 'styled-components'
+
+const MainContainer = styled.div`
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+`;
+
+const GenFriendDiv = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const GenServiceDiv = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 class RandomService extends React.Component {
     constructor(props) {
@@ -33,13 +55,17 @@ class RandomService extends React.Component {
 
     render() {
         return (
-            <div>
+            <MainContainer>
                 <h1>Generate a random contact to service here!</h1>
-                <button onClick={this.generateFriend}>Click to generate contact!</button>
-                <p>{this.state.contact.name ? `You will service ${this.state.contact.name}. Click again to pick someone else, or click below to find out how you will will service them.` : null }</p>
-                <button onClick={this.state.contact.name ? this.generateService : null}>Click to generate service!</button>
-                <p>{this.state.service && this.state.contact.name ? `Your service to ${this.state.contact.name} will be ${this.state.service}.  Call them at ${this.state.contact.phoneNumber} or email them at ${this.state.contact.email} to let them know the good news, or click again if you cannot do this service and need to generate another service` : null}</p>
-            </div>
+                <GenFriendDiv>
+                    <button onClick={this.generateFriend}>Click to generate contact!</button>
+                    <p>{this.state.contact.name ? `You will service ${this.state.contact.name}. Click again to pick someone else, or click below to find out how you will will service them.` : null }</p>
+                </GenFriendDiv>
+                <GenServiceDiv>
+                    <button onClick={this.state.contact.name ? this.generateService : null}>Click to generate service!</button>
+                    <p>{this.state.service && this.state.contact.name ? `Your service to ${this.state.contact.name} will be ${this.state.service}.  Call them at ${this.state.contact.phoneNumber} or email them at ${this.state.contact.email} to let them know the good news, or click again if you cannot do this service and need to generate another service` : null}</p>
+                </GenServiceDiv>
+            </MainContainer>
         );
     };
 }
