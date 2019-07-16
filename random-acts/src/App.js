@@ -11,20 +11,28 @@ import Home from './components/Home';
 import OurTeam from './components/OurTeam';
 
 
-function App() {
+class App extends React.Component {
+
+  componentDidMount() {
+    this.props.getDAta()
+  }
+
+  render() {
   return (
-   <div>
-    <NavBar />
-    <div className="App">
-        
-        <ContactList />
-        <ServiceList />
+    <div>
+        <NavBar />
+        <div className="App">
+            
+            <ContactList />
+            <ServiceList />
+        </div>
+        <div className='random'>
+            <RandomService />
+        </div>
     </div>
-    <div className='random'>
-        <RandomService />
-    </div>
-</div>
   );
-}
+} }
 
 export default App;
+
+

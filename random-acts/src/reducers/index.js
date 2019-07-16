@@ -71,6 +71,30 @@ const contactReducer = (state=initialState, action) => {
     }
 }
 
+const signupReducer = (state=initialState, action) => {
+    switch (action.type){
+        case SIGNUP_START:
+            return {
+                ...state,
+                isSigningUp: true,
+            }
+        case SIGNUP_SUCCESS:
+            return {
+                ...state,
+                isSigningUp: false,
+                loggedIn: true
+            }
+        case SIGNUP_FAILURE:
+            return {
+                ...state,
+                isSigningUp: false,
+                error: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
 
 
 
@@ -183,29 +207,7 @@ const loginReducer = (state=initialState, action) => {
     }
 }
 
-const signupReducer = (state=initialState, action) => {
-    switch (action.type){
-        case SIGNUP_START:
-            return {
-                ...state,
-                isSigningUp: true,
-            }
-        case SIGNUP_SUCCESS:
-            return {
-                ...state,
-                isSigningUp: false,
-                loggedIn: true
-            }
-        case LOGIN_FAILURE:
-            return {
-                ...state,
-                isSigningUp: false,
-                error: action.payload
-            }
-        default:
-            return state;
-    }
-}
+
 
 
 
@@ -217,5 +219,5 @@ export const rootReducer = combineReducers({
     contactReducer,
     //fetchReducer,
     //loginReducer,
-    //signupReducer
+    signupReducer
 })
