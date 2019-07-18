@@ -8,8 +8,14 @@ import NavBar from './components/NavBar';
 import { Route } from 'react-router-dom';
 
 
-function App() {
+class App extends React.Component {
+
+  
+
+  render() {
   return (
+ 
+
       <div className="App">
         <Route path="/" render={props =>  <NavBar {...props} />} />
         <Route path="/contacts" render={props =>  <ContactsPage {...props} />} />
@@ -17,7 +23,10 @@ function App() {
         <Route path="/random-acts" render={props =>  <RandomActsPage {...props} />} />
         <Route path="/random-service" render={props =>  <ContactsPage {...props} />} />
       </div>
+
   );
-}
+} }
 
 export default App;
+
+

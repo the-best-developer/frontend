@@ -1,15 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import './SignUp.css'
+import './SignUp.css';
+import { signUp } from '../actions';
 
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
+            username: '',
             password: '',
-            verifyPassword: '',
             email: '',
         }
     }
@@ -21,20 +21,15 @@ class SignUp extends React.Component {
         })
     }
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        if (this.state.firstName && this.state.lastName && this.state.password && this.state.verifyPassword && this.state.email && this.state.password === this.state.verifyPassword) {
-            console.log('you are in')
-        } else {
-            console.log('please fill out all fields and make sure passwords match')
-        }
+        this.props.signUp(this.state);
         this.setState({
-            firstName: '',
-            lastName: '',
+            username: '',
             password: '',
-            verifyPassword: '',
             email: '',
         })
+        
 
     }
 
@@ -42,22 +37,15 @@ class SignUp extends React.Component {
         return (
             <div>
                 <form className='form' type='submit' onSubmit={this.handleSubmit}>
-                    <label>Enter First Name</label>
+                <label>Enter Username</label>
                     <input 
                     type='text'
-                    value={this.state.name}
-                    name='firstName'
-                    placeholder='first name'
+                    value={this.state.username}
+                    name='username'
+                    placeholder='username'
                     onChange={this.handleChange}
                     />
-                    <label>Enter Last Name</label>
-                    <input 
-                    type='text'
-                    value={this.state.lastName}
-                    name='lastName'
-                    placeholder='last name'
-                    onChange={this.handleChange}
-                    />
+                
                     <label>Enter Password</label>
                     <input 
                     type='password'
@@ -66,14 +54,7 @@ class SignUp extends React.Component {
                     placeholder='password'
                     onChange={this.handleChange}
                     />
-                    <label>Verify Password</label>
-                    <input 
-                    type='password'
-                    value={this.state.verifyPassword}
-                    name='verifyPassword'
-                    placeholder='verify password'
-                    onChange={this.handleChange}
-                    />
+                
                     <label>Enter Email</label>
                     <input 
                     type='text'
@@ -90,4 +71,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
+export default connect(null, { signUp })(SignUp);

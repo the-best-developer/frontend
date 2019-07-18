@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
+import { login } from '../actions';
 import './Login.css';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
+            username: '',
             password: '',
         }
     }
@@ -20,9 +22,9 @@ class Login extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        console.log('you are in');
+        this.props.login(this.state);
         this.setState({
-            email: '',
+            username: '',
             password: '',
         })
     }
@@ -31,12 +33,12 @@ class Login extends React.Component {
         return (
             <div>
                 <form className='logForm' type='submit' onSubmit={this.handleSubmit}>
-                    <label>Enter Email</label>
+                    <label>Enter username</label>
                     <input 
                     type='text'
-                    value={this.state.email}
-                    name='email'
-                    placeholder='email'
+                    value={this.state.username}
+                    name='username'
+                    placeholder='username'
                     onChange={this.handleChange}
                     />
                     <label>Enter Password</label>
@@ -54,4 +56,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default connect(null, { login })(Login);
