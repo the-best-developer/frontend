@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './SignUp.css'
 import styled from 'styled-components'
@@ -42,6 +43,7 @@ const StyledP = styled.p`
     margin-top: 25px;
 `;
 
+import { signUp } from '../actions';
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -60,18 +62,15 @@ class SignUp extends React.Component {
         })
     }
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        if (this.state.firstName && this.state.lastName && this.state.password && this.state.verifyPassword && this.state.email && this.state.password === this.state.verifyPassword) {
-            console.log('you are in')
-        } else {
-            console.log('please fill out all fields and make sure passwords match')
-        }
+        this.props.signUp(this.state);
         this.setState({
             username: '',
             password: '',
             email: '',
         })
+        
 
     }
 
@@ -114,4 +113,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
+export default connect(null, { signUp })(SignUp);

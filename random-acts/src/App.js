@@ -12,8 +12,14 @@ import Login from './components/Login'
 import { Route } from 'react-router-dom';
 
 
-function App() {
+class App extends React.Component {
+
+  
+
+  render() {
   return (
+ 
+
       <div className="App">
         <Route exact path="/" render={props =>  <Home {...props} />} />
         <Route path="/" render={props =>  <NavBar {...props} />} />
@@ -24,7 +30,10 @@ function App() {
         <Route path="/signup" render={props =>  <SignUp {...props} />} />
         <Route path="/login" render={props =>  <Login {...props} />} />
       </div>
+
   );
-}
+} }
 
 export default App;
+
+
