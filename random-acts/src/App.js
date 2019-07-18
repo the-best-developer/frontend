@@ -1,14 +1,11 @@
 import React from 'react';
 
 import './App.css';
-import ContactList from './components/ContactList';
-import ServiceList from './components/ServiceList';
-import RandomService from './components/RandomService';
+import ContactsPage from './views/ContactsPage';
+import ServicesPage from './views/ServicesPage';
+import RandomActsPage from './views/RandomActsPage';
 import NavBar from './components/NavBar';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
-import Home from './components/Home';
-import OurTeam from './components/OurTeam';
+import { Route } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -17,17 +14,16 @@ class App extends React.Component {
 
   render() {
   return (
-    <div>
-        <NavBar />
-        <div className="App">
-            
-            <ContactList />
-            <ServiceList />
-        </div>
-        <div className='random'>
-            <RandomService />
-        </div>
-    </div>
+ 
+
+      <div className="App">
+        <Route path="/" render={props =>  <NavBar {...props} />} />
+        <Route path="/contacts" render={props =>  <ContactsPage {...props} />} />
+        <Route path="/services" render={props =>  <ServicesPage {...props} />} />
+        <Route path="/random-acts" render={props =>  <RandomActsPage {...props} />} />
+        <Route path="/random-service" render={props =>  <ContactsPage {...props} />} />
+      </div>
+
   );
 } }
 
