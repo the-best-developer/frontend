@@ -13,9 +13,7 @@ import OurTeam from './components/OurTeam';
 
 class App extends React.Component {
 
-  componentDidMount() {
-    this.props.getDAta()
-  }
+  
 
   render() {
   return (

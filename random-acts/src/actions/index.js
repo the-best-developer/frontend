@@ -37,6 +37,21 @@ export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
+export const EDIT_SERVICE_START = 'EDIT_SERVICE_START';
+export const EDIT_SERVICE_SUCCESS =  'EDIT_SERVICE_SUCCESS';
+export const EDIT_SERVICE_FAILURE = 'EDIT_SERVICE_FAILURE';
+
+export const EDIT_CONTACT_START = 'EDIT_CONTACT_START';
+export const EDIT_CONTACT_SUCCESS =  'EDIT_CONTACT_SUCCESS';
+export const EDIT_CONTACT_FAILURE = 'EDIT_CONTACT_FAILURE';
+
+export const DELETE_CONTACT_START = 'DELETE_CONTACT_START';
+export const DELETE_CONTACT_SUCCESS =  'DELETE_CONTACT_SUCCESS';
+export const DELETE_CONTACT_FAILURE = 'DELETE_CONTACT_FAILURE';
+
+
+//add edit and delete for contacts edit and edit services
+
 /*
 export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
@@ -87,6 +102,29 @@ export const login = creds => dispatch => {
         dispatch({type: LOGIN_SUCCESS})
     })
     .catch(err => dispatch({type: LOGIN_FAILURE, payload: err.response}))
+}
+
+export const editService = (id, service) => dispatch => {
+    dispatch({type: EDIT_SERVICE_START})
+    axios.put(`urlwith/${id}`, service)
+    .then(res => dispatch({type: EDIT_SERVICE_SUCCESS, payload: res.data.payload}))
+    .catch(err => dispatch({type: EDIT_SERVICE_FAILURE, payload: err.response}))
+
+}
+
+export const editContact = (id, contact) => dispatch => {
+    dispatch({type: EDIT_CONTACT_START})
+    axios.put(`urlwith/${id}`, contact)
+    .then(res => dispatch({type: EDIT_CONTACT_SUCCESS, payload: res.data.payload}))
+    .catch(err => dispatch({type: EDIT_CONTACT_FAILURE, payload: err.response}))
+
+}
+
+export const deleteContact = (id) => dispatch => {
+    dispatch({type: DELETE_CONTACT_START})
+    axios.put(`urlwith/${id}`)
+    .then(res => dispatch({type: DELETE_CONTACT_SUCCESS, payload: res.data.payload}))
+    .catch(err => dispatch({type: DELETE_CONTACT_FAILURE, payload: err.response}))
 }
 
 
