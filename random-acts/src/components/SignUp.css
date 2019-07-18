@@ -4,13 +4,10 @@
     align-items: center;
 }
 
-.form input {
-    width: 400px
-}
 .login {
     text-align: center;
 }
-.login:hover {
+/* .login:hover {
     color: purple;
     cursor: pointer
 }
@@ -18,4 +15,4 @@
     color: white;
     background-color: black;
     cursor: pointer;
-}
+} */

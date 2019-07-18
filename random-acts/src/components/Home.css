@@ -1,7 +1,7 @@
 .parallax1 {
-    background-image: url('./assets/buddha.jpeg');
-    min-height: 500px;
-    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./assets/buddha.jpeg');
+    min-height: 75vh;
+    padding-top: 30vh;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -23,9 +23,9 @@
 
 }
 .parallax2 {
-    background-image: url('./assets/paradise.jpeg');
-    min-height: 500px;
-    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./assets/paradise.jpeg');
+    min-height:  80vh;
+    padding-top: 30vh;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -34,9 +34,9 @@
 }
 
 .parallax3 {
-    background-image: url('./assets/nightSky.jpeg');
-    min-height: 700px;
-    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./assets/nightSky.jpeg');
+    min-height: 75vh;
+    padding-top: 30vh;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
