@@ -2,48 +2,77 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MainContainer = styled.div`
-    width: 80%;
-    min-height: 100px;
-    margin: 0 auto;
+const HeadingContainer = styled.div`
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-evenly;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 5px 10px -10px gray;
-    background-color: rgb(31, 56, 104);
-    border-radius: 10px;
+    overflow: hidden;
+    border-radius: 0 0 50px 50px;
+    background-color: rgba(5, 18, 41, 0.85);
+`;
+
+const StyledTitle = styled(Link)`
+    margin: 15px 0 0 40px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+    font-style: italic;
+`;
+
+const NavContainer = styled.div`
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(5, 18, 41, 0.90);
+    overflow: hidden;
 `;
 
 const StyledLinks = styled(Link)`
-    width: 10%;
-    height: 40px;
-    padding-top: 10px;
+    width: 16.66%;
+    height: 20px;
+    padding: 20px;
     text-decoration: none;
     color: white;
-    border-radius: 5px;
-    background-color: darkcyan;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
     font-weight: 600;
-    font-size: 1.2rem;
+    
+    ${props => (props.customStyle && `${props.customStyle}`)}
+`;
 
-    ${props => (props.bgcolor && `background-color: ${props.bgcolor};`)}
-    ${props => (props.color && `color: ${props.color};`)}
+const StyledTryIt = styled(Link)`
+    width: 12.5%;
+    height: 30px;
+    padding-top: 8px
+    margin: 8px 3% 0 0;
+    text-decoration: none;
+    color: white;
+    background-color: goldenrod;
+    border-radius: 20px;
+    font-weight: bold;
+    border: 2px solid white;
 `;
 
 function NavBar () {
     return (
-        <MainContainer>
-            <StyledLinks to="/">About</StyledLinks>
-            <StyledLinks to="/team">Team</StyledLinks>
-            <StyledLinks to="/about">About</StyledLinks>
-            <StyledLinks to="/contacts">Contacts</StyledLinks>
-            <StyledLinks to="/services">Services</StyledLinks>
-            <StyledLinks bgcolor="burlywood" to="/random-acts">Try it!</StyledLinks>
-            <StyledLinks to="/login">Login</StyledLinks>
-            <StyledLinks to="/signup">Sign Up</StyledLinks>
-        </MainContainer>
+        <HeadingContainer>
+            <StyledTitle to="/">Random Acts Generator ! ! !</StyledTitle>
+            <NavContainer>
+                <StyledLinks customStyle="border-left: 2px solid white;" to="/contacts">Contacts</StyledLinks>
+                <StyledLinks to="/services">Services</StyledLinks>
+                <StyledLinks to="/team">Team</StyledLinks>
+                <StyledLinks to="/about">About</StyledLinks>
+                <StyledLinks to="/login">Login</StyledLinks>
+                <StyledLinks customStyle="border-right: 2px solid white;" to="/signup">Sign Up</StyledLinks>
+            </NavContainer>
+            <StyledTryIt to="/random-acts">Generate an act!</StyledTryIt>
+        </HeadingContainer>
     )
 }
 

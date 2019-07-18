@@ -1,29 +1,73 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addNewContact } from '../actions';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import ContactCard from './ContactCard';
 
 const MainContainer = styled.div`
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-top: 100px;
 `;
 
+const ContactsContainer = styled.div`
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+`;
+
 const ContactsListDiv = styled.div`
-    width: 50%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    justify-content: space-evenly;
+    background-color: rgba(4, 37, 63, 0.9);
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px 1px;
+    
+`;
+
+const ContactCardDiv = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: left;
+    flex-wrap: wrap;
+    width: 29%;
+    height: 17.5vh;
+    margin: 1%;
+    padding: 5px;
+    border: 2px solid white;
+    border-radius: 0 10px;
+    color: white;
+    background-color: rgba(4, 37, 63);
+
+`;
+
+const AddContactContainer = styled.div`
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 `;
 
 const AddContactDiv = styled.div`
-    width: 50%;
+    width: 100%;
     display: flex;
+    padding: 3%;
     flex-direction: column;
-    align-items: center;
+    background-color: rgba(4, 37, 63, 0.9);
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px 1px black;
+    text-align: left;
+    color: white;
+    overflow: hidden;
+`;
+
+const StyledButton = styled.button`
+    margin: 20px 0 5px 0;
 `;
 
 class ContactList extends React.Component {
@@ -64,48 +108,52 @@ class ContactList extends React.Component {
     render() {
         return (
             <MainContainer>
-                <ContactsListDiv>
+                <ContactsContainer>
                     <h1>Contacts</h1>
-                    {this.props.contactList.map((c, id) => 
-                    <div key={id}>
-                        <p><b>Name</b>: {c.name}</p>
-                        <p><b>Phone number</b>: {c.phoneNumber}</p>
-                        <p><b>Email address</b>: {c.email}</p>
-                    </div>
-                    )}
-                </ContactsListDiv>
+                    <ContactsListDiv>
+                        {this.props.contactList.map((c, id) => 
+                            <ContactCard name={c.name} phoneNumber={c.phoneNumber} email={c.email} />
+                        )}
+                    </ContactsListDiv>
+                </ContactsContainer>
                 
+                <AddContactContainer>
+                <h1>Add New Contact:</h1>
                 <AddContactDiv>
-                    <h1>Add New Contact:</h1>
                     <form type='submit' onSubmit={this.handleSubmit}>
-                        <h2>Name:</h2>
+                        <p>Name:</p>
                         <input 
                         type='text'
+                        size="40"
                         value={this.state.newContact.name}
                         name='name'
                         placeholder='Enter name here'
                         onChange={this.handleChange}
                         />
-                        <h2>Phone number:</h2>
+                        
+                        <p>Phone number:</p>
                         <input 
                         type='text'
+                        size="40"
                         value={this.state.newContact.phoneNumber}
                         name='phoneNumber'
                         placeholder='Enter phone number here'
                         onChange={this.handleChange}
                         />
-                        <h2>Email:</h2>
+                        
+                        <p>Email:</p>
                         <input 
                         type='text'
+                        size="40"
                         value={this.state.newContact.email}
                         name='email'
                         placeholder='Enter email here'
                         onChange={this.handleChange}
                         />
-                        <br></br><br></br>
-                        <button>Add Contact</button>
+                        <StyledButton>Add Contact</StyledButton>
                     </form>
                 </AddContactDiv>
+                </AddContactContainer>
             </MainContainer>
         );
     };
