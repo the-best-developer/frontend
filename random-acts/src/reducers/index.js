@@ -2,7 +2,15 @@ import { combineReducers } from 'redux';
 
 //import { ADD_SERVICE } from '../actions';
 //import { ADD_CONTACT } from '../actions';
-import { POST_START, POST_SUCCESS, POST_FAILURE, FETCH_START, FETCH_SUCCESS, FETCH_FAILURE, LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_START, SIGNUP_SUCCESS, SIGNUP_FAILURE, EDIT_SERVICE_START, EDIT_SERVICE_SUCCESS, EDIT_SERVICE_FAILURE, EDIT_CONTACT_START, EDIT_CONTACT_SUCCESS, EDIT_CONTACT_FAILURE, DELETE_CONTACT_START, DELETE_CONTACT_SUCCESS, DELETE_CONTACT_FAILURE} from '../actions';
+import { POST_START, POST_SUCCESS, POST_FAILURE, 
+         FETCH_CONTACTS_START, FETCH_CONTACTS_SUCCESS, FETCH_CONTACTS_FAILURE, 
+         FETCH_SERVICES_START, FETCH_SERVICES_SUCCESS, FETCH_SERVICES_FAILURE, 
+         LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, 
+         SIGNUP_START, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
+         EDIT_SERVICE_START, EDIT_SERVICE_SUCCESS, EDIT_SERVICE_FAILURE, 
+         EDIT_CONTACT_START, EDIT_CONTACT_SUCCESS, EDIT_CONTACT_FAILURE, 
+         DELETE_CONTACT_START, DELETE_CONTACT_SUCCESS, DELETE_CONTACT_FAILURE
+        } from '../actions';
 
 const initialState = {
     serviceList: [
@@ -19,25 +27,7 @@ const initialState = {
         'Tell them something nice',
         'Let them pick service of their choice'
     ],
-    contactList: [
-        {
-        name: 'Ian Cook',
-        phoneNumber: '818-414-7366',
-        email: 'dadadude@aol.com',    
-    }, {
-        name: 'Mary Poppins',
-        phoneNumber: '420-429-4255',
-        email: 'poopinMary@gmail.com',    
-    },{
-        name: 'Sally Sallison',
-        phoneNumber: '818-954-4296',
-        email: 'sistasal@hotmail.com',    
-    },{
-        name: 'Joe Gagliano',
-        phoneNumber: '908-421-9999',
-        email: 'JGags@gmail.com',    
-    }
-    ],
+    contactList: [],
     isLoggingIn: false,
     isSigningUp: false,
     loggedIn: false,
@@ -49,34 +39,6 @@ const initialState = {
     isDeletingContact: false,
     error: ''
 }
-/*
-const serviceReducer = (state=initialState, action) => {
-    switch (action.type) {
-        case ADD_SERVICE:
-            return {
-                ...state,
-                serviceList: [...state.serviceList, action.payload]
-            }
-        
-        default:
-            return state;
-    }
-}
-
-const contactReducer = (state=initialState, action) => {
-    switch (action.type) {
-        case ADD_CONTACT:
-            return {
-                ...state,
-                contactList: [...state.contactList, action.payload]
-            }
-        
-        default:
-            return state;
-    }
-}
-*/
-
 
 const signupReducer = (state=initialState, action) => {
     switch (action.type){
@@ -102,31 +64,43 @@ const signupReducer = (state=initialState, action) => {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
 const fetchReducer = (state=initialState, action) => {
     switch (action.type) {
-        case FETCH_START:
+
+        case FETCH_CONTACTS_START:
             return {
                 ...state,
                 isFetching: true
             }
-        case FETCH_SUCCESS:
+
+        case FETCH_CONTACTS_SUCCESS:
             return {
                 ...state,
-                serviceList: action.payload.serviceList,    ///may have to change these 2 based on how data is returned
-                contactList: action.payload.contactList,
+                contactList: [...action.payload],    ///may have to change these 2 based on how data is returned
                 isFetching: false,                          //spread check
             }
-        case FETCH_FAILURE:
+
+        case FETCH_CONTACTS_FAILURE:
+            return {
+                ...state,
+                isFetching: false,                                 //spread check
+                error: action.payload
+            }
+
+        case FETCH_SERVICES_START:
+            return {
+                ...state,
+                isFetching: true
+            }
+
+        case FETCH_SERVICES_SUCCESS:
+            return {
+                ...state,
+                serviceList: [...action.payload],    ///may have to change these 2 based on how data is returned
+                isFetching: false,                          //spread check
+            }
+
+        case FETCH_SERVICES_FAILURE:
             return {
                 ...state,
                 isFetching: false,                                 //spread check
@@ -146,10 +120,11 @@ const contactReducer = (state=initialState, action) => {
                 addingContact: true,
             }
         case POST_SUCCESS:
+            console.log(action.payload)
             return {
-                ...state,       
+                ...state,
                 contactList: action.payload,                     ///check again on these spread operators
-                addingContact: false,
+                addingContact: false
             }
         case POST_FAILURE:
             return {

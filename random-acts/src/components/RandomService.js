@@ -72,8 +72,8 @@ class RandomService extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        contactList: state.contactReducer.contactList,
-        serviceList: state.serviceReducer.serviceList
+        contactList: state.fetchReducer.contactList,
+        serviceList: state.fetchReducer.serviceList
     }
 }
 

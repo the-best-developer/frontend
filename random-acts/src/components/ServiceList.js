@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNewService } from '../actions';
 import styled from 'styled-components'
+import ServicesCard from './ServicesCard'
 
 const MainContainer = styled.div`
     width: 100%;
@@ -27,22 +28,6 @@ const ServiceListDiv = styled.div`
     border-radius: 5px;
     box-shadow: 0px 5px 10px 1px;
     
-`;
-
-const ServicesCardDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    flex-wrap: wrap;
-    width: 20%;
-    height: 17.5vh;
-    margin: 1%;
-    padding: 5px;
-    border: 2px solid white;
-    border-radius: 0 10px;
-    color: white;
-    background-color: rgba(4, 37, 63);
-
 `;
 
 const AddServiceContainer = styled.div`
@@ -99,9 +84,7 @@ class ServiceList extends React.Component {
                 <h1>Service options:</h1>
                 <ServiceListDiv>
                     {this.props.serviceList.map((s, id) =>
-                    <ServicesCardDiv key={id}>
-                        <p>{s}</p>
-                    </ServicesCardDiv>
+                        <ServicesCard service={s} id={id} key={id} />
                     )}
                 </ServiceListDiv>
                 </ServicesContainer>
@@ -129,7 +112,7 @@ class ServiceList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        serviceList: state.serviceReducer.serviceList
+        serviceList: state.fetchReducer.serviceList
     }
 }
 

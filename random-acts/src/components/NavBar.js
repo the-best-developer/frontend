@@ -43,7 +43,7 @@ const StyledLinks = styled(Link)`
     border-right: 1px solid white;
     font-weight: 600;
     
-    ${props => (props.customStyle && `${props.customStyle}`)}
+    ${props => (props.custstyle && `${props.custstyle}`)}
 `;
 
 const StyledTryIt = styled(Link)`
@@ -64,12 +64,12 @@ function NavBar () {
         <HeadingContainer>
             <StyledTitle to="/">Random Acts Generator ! ! !</StyledTitle>
             <NavContainer>
-                <StyledLinks customStyle="border-left: 2px solid white;" to="/contacts">Contacts</StyledLinks>
+                <StyledLinks custstyle="border-left: 2px solid white;" to="/contacts">Contacts</StyledLinks>
                 <StyledLinks to="/services">Services</StyledLinks>
                 <StyledLinks to="/team">Team</StyledLinks>
                 <StyledLinks to="/about">About</StyledLinks>
                 <StyledLinks to="/login">Login</StyledLinks>
-                <StyledLinks customStyle="border-right: 2px solid white;" to="/signup">Sign Up</StyledLinks>
+                <StyledLinks custstyle="border-right: 2px solid white;" to="/signup">Sign Up</StyledLinks>
             </NavContainer>
             <StyledTryIt to="/random-acts">Generate an act!</StyledTryIt>
         </HeadingContainer>

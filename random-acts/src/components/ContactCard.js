@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNewContact } from '../actions';
+import { editContact, deleteContact } from '../actions';
 import styled from 'styled-components'
 
 const ContactCardDiv = styled.div`
@@ -9,7 +9,7 @@ const ContactCardDiv = styled.div`
     text-align: left;
     flex-wrap: wrap;
     width: 29%;
-    height: 17.5vh;
+    min-height: 125px;
     margin: 1%;
     padding: 5px;
     border: 2px solid white;
@@ -18,9 +18,23 @@ const ContactCardDiv = styled.div`
     background-color: rgba(4, 37, 63);
 `;
 
-const StyledButton = styled.button`
-    margin: 20px 0 5px 0;
+const ButtonContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    width: 100%;
+    justify-content: flex-end;
 `;
+
+const StyledButton = styled.button`
+    width: 50px;
+    margin: 0 10px;
+`;
+
+const StyledInput = styled.input`
+    margin: 2px 0;
+`;
+
 
 class ContactCard extends React.Component {
     constructor(props) {
@@ -36,12 +50,13 @@ class ContactCard extends React.Component {
     }
 
     componentDidMount () {
-        this.setState({
+        this.setState(function () {
+            return {
             Contact: {
                 name: this.props.name,
                 phoneNumber: this.props.phoneNumber,
                 email: this.props.email,
-            }
+            }}
         })
     }
 
@@ -65,14 +80,21 @@ class ContactCard extends React.Component {
         })
     }
 
-    handleSubmitEdit = e => {
+    handleSubmitEdit = (id, e) => {
         e.preventDefault();
         console.log(this.state.Contact)
         //Call EDIT axios action here
-
+        this.props.editContact(id, this.state.Contact);
         this.setState({
             isEditing: false
         })
+    }  
+    
+    handleDelete = (id, e) => {
+        e.preventDefault();
+        this.props.deleteContact(id)
+        //Call EDIT axios action here
+
     }
 
     render() {
@@ -80,9 +102,9 @@ class ContactCard extends React.Component {
             (this.state.isEditing)
             ? 
             <ContactCardDiv>
-                <form type='submit' onSubmit={this.handleSubmit}>
+                <form type='submit' onSubmit={(e) => this.handleSubmitEdit(this.props.id, e)}>
                         <p><b>Name</b>:
-                        <input 
+                        <StyledInput 
                         type='text'
                         size="30"
                         value={this.state.Contact.name}
@@ -92,7 +114,7 @@ class ContactCard extends React.Component {
                         />
                         </p>
                         <p><b>Phone</b>:
-                        <input 
+                        <StyledInput 
                         type='text'
                         size="30"
                         value={this.state.Contact.phoneNumber}
@@ -102,7 +124,7 @@ class ContactCard extends React.Component {
                         />
                         </p>
                         <p><b>Email</b>:
-                        <input 
+                        <StyledInput 
                         type='text'
                         size="30"
                         value={this.state.Contact.email}
@@ -111,7 +133,9 @@ class ContactCard extends React.Component {
                         onChange={this.handleChange}
                         />
                         </p>
-                        <button onClick={this.handleSubmit}>Submit</button>
+                        <ButtonContainer>
+                            <StyledButton onClick={this.handleSubmit}>Submit</StyledButton>
+                        </ButtonContainer>
                     </form>
             </ContactCardDiv>
             :
@@ -119,10 +143,13 @@ class ContactCard extends React.Component {
                 <p><b>Name</b>: {this.props.name}</p>
                 <p><b>Phone</b>: {this.props.phoneNumber}</p>
                 <p><b>Email</b>: {this.props.email}</p>
-                <button onClick={this.handleEdit}>Edit</button>
+                <ButtonContainer>
+                    <StyledButton onClick={this.handleEdit}>Edit</StyledButton>
+                    <StyledButton onClick={(e) => this.handleDelete(this.props.id, e)}>Delete</StyledButton>
+                </ButtonContainer>
             </ContactCardDiv>
         );
     };
 }
 
-export default connect(null, { })(ContactCard);
+export default connect(null, { editContact, deleteContact })(ContactCard);

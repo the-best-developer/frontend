@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import './SignUp.css'
+import { signUp } from '../actions';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import './SignUp.css'
 
 const MainContainer = styled.div`
     width: 100%;
@@ -42,8 +42,6 @@ const StyledLink = styled(Link)`
 const StyledP = styled.p`
     margin-top: 25px;
 `;
-
-import { signUp } from '../actions';
 
 class SignUp extends React.Component {
     constructor(props) {
