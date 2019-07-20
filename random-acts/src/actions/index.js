@@ -45,14 +45,14 @@ export const FETCH_SERVICES_FAILURE = 'FETCH_SERVICES_FAILURE';
 
 export const getServicesData = () => dispatch => {
     dispatch({type: FETCH_SERVICES_START})
-    axiosWithAuth().get('http://localhost:9393/api/services')
+    axiosWithAuth().get('https://randomactsgenerator.herokuapp.com/api/services')
     .then(res => dispatch({type: FETCH_SERVICES_SUCCESS, payload: res.data}))
     .catch(err => dispatch({type: FETCH_SERVICES_FAILURE, payload: err.response}))
 }
 
 export const getContactsData = () => dispatch => {
     dispatch({type: FETCH_CONTACTS_START})
-    axiosWithAuth().get('http://localhost:9393/api/contacts')
+    axiosWithAuth().get('https://randomactsgenerator.herokuapp.com/api/contacts')
     .then(res => dispatch({type: FETCH_CONTACTS_SUCCESS, payload: res.data}))
     .catch(err => dispatch({type: FETCH_CONTACTS_FAILURE, payload: err.response}))
 }
@@ -60,7 +60,7 @@ export const getContactsData = () => dispatch => {
 export const addNewService = newService => dispatch => {
     dispatch({type: POST_SERVICES_START});
     console.log(newService)
-    axiosWithAuth().post('http://localhost:9393/api/services', newService)
+    axiosWithAuth().post('https://randomactsgenerator.herokuapp.com/api/services', newService)
     .then(res => {
         dispatch({type: POST_SERVICES_SUCCESS, payload: res.data})
         dispatch(getServicesData());
@@ -70,7 +70,7 @@ export const addNewService = newService => dispatch => {
 
 export const addNewContact = newContact => dispatch => {
     dispatch({type: POST_CONTACTS_START});
-    axiosWithAuth().post('http://localhost:9393/api/contacts', newContact)
+    axiosWithAuth().post('https://randomactsgenerator.herokuapp.com/api/contacts', newContact)
     .then(res => {
          dispatch({type: POST_CONTACTS_SUCCESS, payload: res.data})
          dispatch(getContactsData());
@@ -81,7 +81,7 @@ export const addNewContact = newContact => dispatch => {
 
 export const signUp = creds => dispatch => {
     dispatch({type: SIGNUP_START})
-    axios.post('http://localhost:9393/api/register', creds)
+    axios.post('https://randomactsgenerator.herokuapp.com/api/register', creds)
     .then(res => {
         localStorage.setItem('token', res.data.payload)  ////CHECK IF THIS IS CORRECT WAY TO DO THIS PART
         dispatch({type: SIGNUP_SUCCESS})
@@ -92,7 +92,7 @@ export const signUp = creds => dispatch => {
 
 export const login = creds => dispatch => {
     dispatch({type: LOGIN_START})
-    axios.post('http://localhost:9393/api/login', creds)
+    axios.post('https://randomactsgenerator.herokuapp.com/api/login', creds)
     .then(res => {
         localStorage.setItem('token', res.data.token)
         dispatch({type: LOGIN_SUCCESS})
@@ -103,7 +103,7 @@ export const login = creds => dispatch => {
 
 export const editService = (id, service) => dispatch => {
     dispatch({type: EDIT_SERVICE_START})
-    axios.put(`http://localhost:9393/api/services/${id}`, service)
+    axios.put(`https://randomactsgenerator.herokuapp.com/api/services/${id}`, service)
     .then(res => {
         dispatch({type: EDIT_SERVICE_SUCCESS, payload: res.data.payload})
         dispatch(getServicesData());
@@ -114,7 +114,7 @@ export const editService = (id, service) => dispatch => {
 
 export const editContact = (id, contact) => dispatch => {
     dispatch({type: EDIT_CONTACT_START})
-    axios.put(`http://localhost:9393/api/contacts/${id}`, contact)
+    axios.put(`https://randomactsgenerator.herokuapp.com/api/contacts/${id}`, contact)
     .then(res => { 
         dispatch({type: EDIT_CONTACT_SUCCESS, payload: res.data.payload})
         dispatch(getContactsData());
@@ -125,7 +125,7 @@ export const editContact = (id, contact) => dispatch => {
 
 export const deleteContact = (id) => dispatch => {
     dispatch({type: DELETE_CONTACT_START})
-    axios.delete(`http://localhost:9393/api/contacts/${id}`)
+    axios.delete(`https://randomactsgenerator.herokuapp.com/api/contacts/${id}`)
     .then(res => { 
         dispatch({type: DELETE_CONTACT_SUCCESS, payload: res.data.payload})
         dispatch(getContactsData());
