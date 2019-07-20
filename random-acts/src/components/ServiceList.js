@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNewService } from '../actions';
 import styled from 'styled-components'
+import ServicesCard from './ServicesCard'
 
 const MainContainer = styled.div`
     width: 100%;
@@ -27,22 +28,6 @@ const ServiceListDiv = styled.div`
     border-radius: 5px;
     box-shadow: 0px 5px 10px 1px;
     
-`;
-
-const ServicesCardDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    flex-wrap: wrap;
-    width: 20%;
-    height: 17.5vh;
-    margin: 1%;
-    padding: 5px;
-    border: 2px solid white;
-    border-radius: 0 10px;
-    color: white;
-    background-color: rgba(4, 37, 63);
-
 `;
 
 const AddServiceContainer = styled.div`
@@ -74,13 +59,18 @@ class ServiceList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newService: '',
+            newService: {
+                service: ''
+            }
         }
     }
     
     handleChange = e => {
         this.setState({
-            [e.target.name]: e.target.value
+            newService: {
+            ...this.state.newService,
+            service: e.target.value
+            }
         })
     }
 
@@ -88,7 +78,9 @@ class ServiceList extends React.Component {
         e.preventDefault();
         this.props.addNewService(this.state.newService)
         this.setState({
-            newService: ''
+            newService: {
+                service: ''
+            }
         })
     }
 
@@ -98,10 +90,8 @@ class ServiceList extends React.Component {
                 <ServicesContainer >
                 <h1>Service options:</h1>
                 <ServiceListDiv>
-                    {this.props.serviceList.map((s, id) =>
-                    <ServicesCardDiv key={id}>
-                        <p>{s}</p>
-                    </ServicesCardDiv>
+                    {this.props.serviceList[0].service && this.props.serviceList.map((s, id) =>
+                        <ServicesCard key={id} service={s.service} id={s.id} />
                     )}
                 </ServiceListDiv>
                 </ServicesContainer>
@@ -112,9 +102,9 @@ class ServiceList extends React.Component {
                         <p>Service:</p>
                         <input 
                             type='text'
-                            name='newService'
+                            name='service'
                             size='40'
-                            value={this.state.newService}
+                            value={this.state.newService.service}
                             placeholder='Enter new service here'
                             onChange={this.handleChange}
                         />
@@ -129,7 +119,7 @@ class ServiceList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        serviceList: state.serviceReducer.serviceList
+        serviceList: state.fetchReducer.serviceList
     }
 }
 

@@ -30,22 +30,6 @@ const ContactsListDiv = styled.div`
     
 `;
 
-const ContactCardDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    flex-wrap: wrap;
-    width: 29%;
-    height: 17.5vh;
-    margin: 1%;
-    padding: 5px;
-    border: 2px solid white;
-    border-radius: 0 10px;
-    color: white;
-    background-color: rgba(4, 37, 63);
-
-`;
-
 const AddContactContainer = styled.div`
     width: 20%;
     display: flex;
@@ -64,6 +48,19 @@ const AddContactDiv = styled.div`
     text-align: left;
     color: white;
     overflow: hidden;
+`;
+
+const BlankContactCard = styled.div`
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    border: 2px solid white;
+    border-radius: 0 10px;
+    color: white;
+    background-color: rgba(4, 37, 63);
+    box-shadow: 0px 5px 10px 1px black;
 `;
 
 const StyledButton = styled.button`
@@ -111,9 +108,14 @@ class ContactList extends React.Component {
                 <ContactsContainer>
                     <h1>Contacts</h1>
                     <ContactsListDiv>
-                        {this.props.contactList.map((c, id) => 
-                            <ContactCard name={c.name} phoneNumber={c.phoneNumber} email={c.email} />
-                        )}
+                        {(this.props.contactList.length === 0)
+                        ?
+                            <BlankContactCard>No contacts availble</BlankContactCard>
+                        :
+                            this.props.contactList.map((c, id) => 
+                                <ContactCard key={id} id={c.id} name={c.name} phoneNumber={c.phoneNumber} email={c.email} />
+                            )
+                        }
                     </ContactsListDiv>
                 </ContactsContainer>
                 
@@ -161,7 +163,7 @@ class ContactList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        contactList: state.contactReducer.contactList
+        contactList: state.fetchReducer.contactList
     }
 }
 
