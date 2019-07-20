@@ -73,8 +73,9 @@ class Login extends React.Component {
         return (
             <MainContainer>
                 <LoginContainer>
+                    <h1>Login</h1>
                 <form className='logForm' type='submit' onSubmit={this.handleSubmit}>
-                    <StyledLabel>Email</StyledLabel>
+                    <StyledLabel>Username</StyledLabel>
                     <input 
                     type='text'
                     value={this.state.username}

@@ -47,10 +47,9 @@ class ServicesCard extends React.Component {
     }
 
     componentDidMount () {
-        this.setState(function () {
-            return {
+        console.log(this.props.service)
+        this.setState({
                 service: this.props.service
-            }
         })
     }
 
@@ -70,8 +69,7 @@ class ServicesCard extends React.Component {
     handleSubmitEdit = (id, e) => {
         e.preventDefault();
         console.log(this.state.service)
-        //Call EDIT axios action here
-        this.props.editService(id, this.state.service);
+        this.props.editService(id, {service: this.state.service});
         this.setState({
             isEditing: false,
             service: this.props.service
@@ -99,7 +97,7 @@ class ServicesCard extends React.Component {
             </ServicesCardDiv>
             :
             <ServicesCardDiv>
-                <p>{this.state.service}</p>
+                <p>{this.props.service}</p>
                 <ButtonContainer>
                     <StyledButton onClick={this.handleEdit}>Edit</StyledButton>
                 </ButtonContainer>

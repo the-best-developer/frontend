@@ -25,14 +25,15 @@ class App extends React.Component {
   render() {
   return (
       <div className="App">
-        <Route exact path="/" render={props =>  <Home {...props} />} />
-        <Route path="/" render={props =>  <NavBar {...props} />} />
-        <Route path="/contacts" render={props =>  <ContactsPage {...props} />} />
-        <Route path="/services" render={props =>  <ServicesPage {...props} />} />
-        <Route path="/random-acts" render={props =>  <RandomActsPage {...props} />} />
-        <Route path="/team" render={props =>  <OurTeam {...props} />} />
-        <Route path="/signup" render={props =>  <SignUp {...props} />} />
-        <Route path="/login" render={props =>  <Login {...props} />} />
+        <Route exact path="/" render={props => <Home {...props} />} />
+        <Route path="/" render={props => <NavBar {...props} />} />
+        <Route path="/contacts" render={props => <ContactsPage {...props} />} />
+        <Route path="/services" render={props => <ServicesPage {...props} />} />
+        <Route path="/random-acts" render={props => <RandomActsPage {...props} />} />
+        <Route path="/about" render={props => <Login {...props} />} />
+        <Route path="/team" render={props => <OurTeam {...props} />} />
+        <Route path="/signup" render={props => <SignUp {...props} />} />
+        <Route path="/login" render={props => <Login {...props} />} />
       </div>
   );
 } }

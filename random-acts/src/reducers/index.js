@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 
 //import { ADD_SERVICE } from '../actions';
 //import { ADD_CONTACT } from '../actions';
-import { POST_START, POST_SUCCESS, POST_FAILURE, 
+import { POST_SERVICES_START, POST_SERVICES_SUCCESS, POST_SERVICES_FAILURE, 
+         POST_CONTACTS_START, POST_CONTACTS_SUCCESS, POST_CONTACTS_FAILURE, 
          FETCH_CONTACTS_START, FETCH_CONTACTS_SUCCESS, FETCH_CONTACTS_FAILURE, 
          FETCH_SERVICES_START, FETCH_SERVICES_SUCCESS, FETCH_SERVICES_FAILURE, 
          LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, 
@@ -114,19 +115,19 @@ const fetchReducer = (state=initialState, action) => {
 
 const contactReducer = (state=initialState, action) => {
     switch (action.type) {
-        case POST_START: 
+        case POST_CONTACTS_START: 
             return {
                 ...state,
                 addingContact: true,
             }
-        case POST_SUCCESS:
+        case POST_CONTACTS_SUCCESS:
             console.log(action.payload)
             return {
                 ...state,
                 contactList: action.payload,                     ///check again on these spread operators
                 addingContact: false
             }
-        case POST_FAILURE:
+        case POST_CONTACTS_FAILURE:
             return {
                 ...state,
                 addingContact: false,                      ///check if spread used correctly
@@ -174,18 +175,18 @@ const contactReducer = (state=initialState, action) => {
 
 const serviceReducer = (state=initialState, action) => { ///check to see if using the same POST_START etc for serviceReducer and contactReducer will cause bugs prob not cuz called throught different actions and onclicks tied to different components but check to see
     switch (action.type) {
-        case POST_START:
+        case POST_SERVICES_START:
             return {
                 ...state,
                 addingService: true
             }
-        case POST_SUCCESS:
+        case POST_SERVICES_SUCCESS:
             return {
                 ...state,
                 serviceList: action.payload, ///Check to see if this sytax is correct for this situation
                 addingService: false
             }
-        case POST_FAILURE:
+        case POST_SERVICES_FAILURE:
             return {
                 ...state,
                 addingService: false,

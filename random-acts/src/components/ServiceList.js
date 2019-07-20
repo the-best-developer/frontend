@@ -59,13 +59,18 @@ class ServiceList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newService: '',
+            newService: {
+                service: ''
+            }
         }
     }
     
     handleChange = e => {
         this.setState({
-            [e.target.name]: e.target.value
+            newService: {
+            ...this.state.newService,
+            service: e.target.value
+            }
         })
     }
 
@@ -73,7 +78,9 @@ class ServiceList extends React.Component {
         e.preventDefault();
         this.props.addNewService(this.state.newService)
         this.setState({
-            newService: ''
+            newService: {
+                service: ''
+            }
         })
     }
 
@@ -83,8 +90,8 @@ class ServiceList extends React.Component {
                 <ServicesContainer >
                 <h1>Service options:</h1>
                 <ServiceListDiv>
-                    {this.props.serviceList.map((s, id) =>
-                        <ServicesCard service={s} id={id} key={id} />
+                    {this.props.serviceList[0].service && this.props.serviceList.map((s, id) =>
+                        <ServicesCard key={id} service={s.service} id={s.id} />
                     )}
                 </ServiceListDiv>
                 </ServicesContainer>
@@ -95,9 +102,9 @@ class ServiceList extends React.Component {
                         <p>Service:</p>
                         <input 
                             type='text'
-                            name='newService'
+                            name='service'
                             size='40'
-                            value={this.state.newService}
+                            value={this.state.newService.service}
                             placeholder='Enter new service here'
                             onChange={this.handleChange}
                         />

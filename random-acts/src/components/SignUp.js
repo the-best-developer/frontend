@@ -76,6 +76,7 @@ class SignUp extends React.Component {
         return (
             <MainContainer>
                 <SignUpContainer>
+                    <h1>Sign Up</h1>
                 <form className='form' type='submit' onSubmit={this.handleSubmit}>
                 <StyledLabel>Username</StyledLabel>
                     <input 

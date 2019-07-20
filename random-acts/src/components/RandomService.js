@@ -47,7 +47,7 @@ class RandomService extends React.Component {
     }
 
     generateService = () => {
-        let service  = this.props.serviceList[Math.floor(Math.random() * this.props.serviceList.length)]
+        let service  = this.props.serviceList[Math.floor(Math.random() * this.props.serviceList.length)].service
         this.setState({
             service: service
         })

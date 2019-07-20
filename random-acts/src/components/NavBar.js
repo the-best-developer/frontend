@@ -34,7 +34,7 @@ const NavContainer = styled.div`
 `;
 
 const StyledLinks = styled(Link)`
-    width: 16.66%;
+    width: 20%;
     height: 20px;
     padding: 20px;
     text-decoration: none;
@@ -67,7 +67,6 @@ function NavBar () {
                 <StyledLinks custstyle="border-left: 2px solid white;" to="/contacts">Contacts</StyledLinks>
                 <StyledLinks to="/services">Services</StyledLinks>
                 <StyledLinks to="/team">Team</StyledLinks>
-                <StyledLinks to="/about">About</StyledLinks>
                 <StyledLinks to="/login">Login</StyledLinks>
                 <StyledLinks custstyle="border-right: 2px solid white;" to="/signup">Sign Up</StyledLinks>
             </NavContainer>

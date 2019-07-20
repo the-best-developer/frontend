@@ -1,5 +1,6 @@
 import axios from 'axios';
 import axiosWithAuth from './axiosWithAuth'; 
+import { history } from '../index'
 
 //WE MUST ADD CORRECT URL PATHS TO ALL THESE AXIOS CALLS
 
@@ -10,6 +11,14 @@ export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
+export const POST_CONTACTS_START = 'POST_CONTACTS_START';
+export const POST_CONTACTS_SUCCESS = 'POST_CONTACTS_SUCCESS';
+export const POST_CONTACTS_FAILURE = 'POST_CONTACTS_FAILURE';
+
+export const POST_SERVICES_START = 'POST_SERVICES_START';
+export const POST_SERVICES_SUCCESS = 'POST_SERVICES_SUCCESS';
+export const POST_SERVICES_FAILURE = 'POST_SERVICES_FAILURE';
 
 export const EDIT_SERVICE_START = 'EDIT_SERVICE_START';
 export const EDIT_SERVICE_SUCCESS =  'EDIT_SERVICE_SUCCESS';
@@ -33,6 +42,7 @@ export const FETCH_SERVICES_START = 'FETCH_SERVICES_START';
 export const FETCH_SERVICES_SUCCESS = 'FETCH_SERVICES_SUCCESS';
 export const FETCH_SERVICES_FAILURE = 'FETCH_SERVICES_FAILURE';
 
+
 export const getServicesData = () => dispatch => {
     dispatch({type: FETCH_SERVICES_START})
     axiosWithAuth().get('http://localhost:9393/api/services')
@@ -47,29 +57,25 @@ export const getContactsData = () => dispatch => {
     .catch(err => dispatch({type: FETCH_CONTACTS_FAILURE, payload: err.response}))
 }
 
-
-export const POST_START = 'POST_START';
-export const POST_SUCCESS = 'POST_SUCCESS';
-export const POST_FAILURE = 'POST_FAILURE';
-
 export const addNewService = newService => dispatch => {
-    dispatch({type: POST_START});
+    dispatch({type: POST_SERVICES_START});
+    console.log(newService)
     axiosWithAuth().post('http://localhost:9393/api/services', newService)
     .then(res => {
-        dispatch({type: POST_SUCCESS, payload: res.data})
+        dispatch({type: POST_SERVICES_SUCCESS, payload: res.data})
         dispatch(getServicesData());
     })
-    .catch(err => dispatch({type: POST_FAILURE, payload: err.response}))
+    .catch(err => dispatch({type: POST_SERVICES_FAILURE, payload: err.response}))
 }
 
 export const addNewContact = newContact => dispatch => {
-    dispatch({type: POST_START});
+    dispatch({type: POST_CONTACTS_START});
     axiosWithAuth().post('http://localhost:9393/api/contacts', newContact)
     .then(res => {
-         dispatch({type: POST_SUCCESS, payload: res.data})
+         dispatch({type: POST_CONTACTS_SUCCESS, payload: res.data})
          dispatch(getContactsData());
     })
-    .catch(err => dispatch({type: POST_FAILURE, payload: err.response}))
+    .catch(err => dispatch({type: POST_CONTACTS_FAILURE, payload: err.response}))
 }
 
 
@@ -78,8 +84,8 @@ export const signUp = creds => dispatch => {
     axios.post('http://localhost:9393/api/register', creds)
     .then(res => {
         localStorage.setItem('token', res.data.payload)  ////CHECK IF THIS IS CORRECT WAY TO DO THIS PART
-        window.alert("Signed in!");
         dispatch({type: SIGNUP_SUCCESS})
+        history.push('/login');
     })
     .catch(err => dispatch({type: SIGNUP_FAILURE, payload: err.response}))
 }
@@ -89,9 +95,8 @@ export const login = creds => dispatch => {
     axios.post('http://localhost:9393/api/login', creds)
     .then(res => {
         localStorage.setItem('token', res.data.token)
-        console.log(res)
-        window.alert("Logged in!");
         dispatch({type: LOGIN_SUCCESS})
+        history.push('/contacts');
     })
     .catch(err => dispatch({type: LOGIN_FAILURE, payload: err.response}))
 }
