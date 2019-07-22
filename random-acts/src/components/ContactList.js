@@ -6,16 +6,29 @@ import ContactCard from './ContactCard';
 
 const MainContainer = styled.div`
     width: 100%;
-    margin: 0 auto;
+    margin: 10px auto;
     display: flex;
     justify-content: space-evenly;
     padding-top: 100px;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%
+    }
 `;
 
 const ContactsContainer = styled.div`
     width: 70%;
     display: flex;
     flex-wrap: wrap;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%
+    }
 `;
 
 const ContactsListDiv = styled.div`
@@ -27,6 +40,13 @@ const ContactsListDiv = styled.div`
     background-color: rgba(4, 37, 63, 0.9);
     border-radius: 5px;
     box-shadow: 0px 5px 10px 1px;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%
+    }
     
 `;
 
@@ -35,6 +55,12 @@ const AddContactContainer = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%
+    }
 `;
 
 const AddContactDiv = styled.div`
@@ -48,6 +74,11 @@ const AddContactDiv = styled.div`
     text-align: left;
     color: white;
     overflow: hidden;
+
+    @media( max-width: 800px ) {
+        width: 94%
+        padding: 3%;
+    }
 `;
 
 const BlankContactCard = styled.div`
@@ -61,10 +92,18 @@ const BlankContactCard = styled.div`
     color: white;
     background-color: rgba(4, 37, 63);
     box-shadow: 0px 5px 10px 1px black;
+
+    @media( max-width: 800px ) {
+        width: 100%
+    }
 `;
 
 const StyledButton = styled.button`
     margin: 20px 0 5px 0;
+
+    @media( max-width: 800px ) {
+        margin: 20px 0 5px 10px;
+    }
 `;
 
 class ContactList extends React.Component {

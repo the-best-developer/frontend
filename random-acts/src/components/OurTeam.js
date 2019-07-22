@@ -23,6 +23,12 @@ const TeamDiv = styled.div`
     background-color: rgba(4, 37, 63, 0.9);
     border-radius: 5px;
     box-shadow: 0px 5px 10px 1px;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        width: 80%
+    }
 `;
 
 const CascadeDiv1 = styled.div`
@@ -34,6 +40,13 @@ const CascadeDiv1 = styled.div`
     background-color: rgba(5, 18, 41, 0.45);
     border-radius: 20px;
     box-shadow: 0px 5px 10px 1px;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        margin: 20px 0;
+        
+        width: 80%
+    }
 `;
 
 const CascadeDiv2 = styled.div`

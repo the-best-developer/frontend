@@ -16,6 +16,11 @@ const ContactCardDiv = styled.div`
     border-radius: 0 10px;
     color: white;
     background-color: rgba(4, 37, 63);
+
+    @media( max-width: 800px ) {
+        width: 80%
+        margin: 20px 0;
+    }
 `;
 
 const ButtonContainer = styled.div`
