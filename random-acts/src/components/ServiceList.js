@@ -6,16 +6,29 @@ import ServicesCard from './ServicesCard'
 
 const MainContainer = styled.div`
     width: 100%;
-    margin: 0 auto;
+    margin: 20px auto;
     display: flex;
     justify-content: space-evenly;
     padding-top: 100px;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%
+    }
 `;
 
 const ServicesContainer = styled.div`
     width: 70%;
     display: flex;
     flex-wrap: wrap;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%
+    }
 `;
 
 const ServiceListDiv = styled.div`
@@ -27,6 +40,13 @@ const ServiceListDiv = styled.div`
     background-color: rgba(4, 37, 63, 0.9);
     border-radius: 5px;
     box-shadow: 0px 5px 10px 1px;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%
+    }
     
 `;
 
@@ -35,6 +55,12 @@ const AddServiceContainer = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
+
+    @media( max-width: 800px ) {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%
+    }
 `;
 
 const AddServiceDiv = styled.div`
@@ -48,10 +74,18 @@ const AddServiceDiv = styled.div`
     text-align: left;
     color: white;
     overflow: hidden;
+
+    @media( max-width: 800px ) {
+        width: 94%
+    }
 `;
 
 const StyledButton = styled.button`
     margin: 20px 0 5px 0;
+
+    @media( max-width: 800px ) {
+        margin: 20px 0 5px 10px;
+    }
 `;
 
 
@@ -90,7 +124,7 @@ class ServiceList extends React.Component {
                 <ServicesContainer >
                 <h1>Service options:</h1>
                 <ServiceListDiv>
-                    {this.props.serviceList[0].service && this.props.serviceList.map((s, id) =>
+                    {this.props.serviceList && this.props.serviceList.map((s, id) =>
                         <ServicesCard key={id} service={s.service} id={s.id} />
                     )}
                 </ServiceListDiv>
