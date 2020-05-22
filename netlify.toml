@@ -1,6 +1,6 @@
 [build]
 base = "random-acts/"
-publish = "random-acts/build/"
+publish = "build/"
 command = "npm run build"
 
 [[redirects]]
